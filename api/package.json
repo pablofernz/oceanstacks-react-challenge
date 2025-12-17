@@ -1,19 +1,21 @@
 {
-  "name": "hoytrabajo---tienda",
+  "name": "oceanstacks---tienda",
   "version": "1.0.0",
-  "main": "app.js",
-  "type": "commonjs",
+  "main": "dist/index.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/app.js",
-    "dev": "tsc-watch --onSuccess \"node dist/app.js\""
+    "start": "node dist/index.js",
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@supabase/supabase-js": "^2.87.3",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0"
   },
   "devDependencies": {
