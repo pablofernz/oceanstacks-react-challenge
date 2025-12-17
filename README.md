@@ -1,1 +1,0 @@
-# oceanstacks-react-challenge
