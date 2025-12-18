@@ -1,5 +1,3 @@
-'use client';
-import { motion } from 'motion/react';
 import type { IProduct } from '../../types/product';
 
 interface Props {
@@ -10,12 +8,8 @@ interface Props {
 }
 export function ProductCard({ product, addToOrder, isAdded, deleteProduct }: Props) {
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 0.3, ease: 'easeInOut' }}
-			exit={{ opacity: 0 }}
-			layout
+		<div
+
 			className="flex h-fit w-[200px] shrink-0 flex-col items-start justify-start gap-[5px] rounded-[20px] bg-[#2c2c2c] p-[10px]"
 		>
 			<div
@@ -54,25 +48,8 @@ export function ProductCard({ product, addToOrder, isAdded, deleteProduct }: Pro
 				{isAdded ? 'Añadido' : 'Añadir'}
 			</button>
 
-		</motion.div>
-	);
-}
-
-export function ProductCardSkeleton() {
-	return (
-		<div className="pointer-events-none flex h-fit w-[200px] animate-pulse select-none flex-col items-start justify-start gap-2 rounded-[20px] bg-[#282828] p-[15px]">
-			<div className="h-[100px] w-full rounded-[10px] bg-[#363636]" />
-			<p className="rounded-[5px] bg-[#373737] text-base font-black text-transparent">
-				Producto 1
-			</p>
-			<div className="flex w-full items-center justify-between">
-				<p className="rounded-[5px] bg-[#373737] text-base font-black text-transparent">
-					$200
-				</p>
-				<button className="h-full w-fit cursor-pointer rounded-[10px] border-none bg-[#323232] px-5 py-2 text-sm font-bold text-transparent">
-					Buy
-				</button>
-			</div>
 		</div>
 	);
 }
+
+

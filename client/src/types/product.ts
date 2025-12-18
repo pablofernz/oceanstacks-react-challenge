@@ -3,6 +3,7 @@ export interface IProduct {
 	name: string;
 	price: number;
 	createdAt: Date;
+	is_active: boolean;
 }
 
 export interface IProductToOrder {

@@ -58,7 +58,7 @@ export const OrderModal = ({ closeModal, currentOrder, handleQuantityChange, han
 					</div>
 				) : (
 					currentOrder.map((item) => (
-						<div key={item.id} className="flex h-[60px] w-full flex-shrink-0 items-center justify-between rounded-[10px] bg-[#353535] px-[15px]">
+						<div key={item.id} className="flex min-h-[60px] w-full flex-shrink-0 items-center justify-between rounded-[10px] bg-[#353535] px-[15px]">
 							<div className="flex flex-col">
 								<p className="text-[#b0b0b0]">{item.name}</p>
 								<p className="text-[12px] text-[#808080]">${item.price}</p>

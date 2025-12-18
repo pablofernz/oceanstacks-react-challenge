@@ -15,7 +15,11 @@ export const OrderCard = ({ order, handleDelete, deletingId }: Props) => {
                 <div>
                     <p className="text-sm text-[#a0a0a0]">ID: {order.id.split('-')[0]}</p>
                     <p className="text-xs text-[#808080]">
-                        {new Date(order.created_at).toLocaleString()}
+                        {new Date(
+                            order.created_at.includes("Z") || order.created_at.includes("+")
+                                ? order.created_at
+                                : `${order.created_at}Z`
+                        ).toLocaleString()}
                     </p>
                 </div>
                 <div className="flex items-center gap-4">

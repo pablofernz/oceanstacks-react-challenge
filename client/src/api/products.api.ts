@@ -29,7 +29,7 @@ export const deleteProduct = async (id: string) => {
 
 	if (!response.ok) {
 		const errorData = await response.json();
-		throw new Error(errorData.message || 'Error al eliminar el producto');
+		throw new Error(errorData.message || 'Error al eliminar el producto. Si ya se ordenó se debe eliminar su orden primero.');
 	}
 
 	return response.json();

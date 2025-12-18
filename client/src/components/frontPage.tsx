@@ -119,7 +119,7 @@ export const FrontPage = () => {
 			fetchProducts();
 		} catch (error) {
 			console.error('Error deleting product:', error);
-			alert('Error al eliminar el producto');
+			alert(error instanceof Error ? error.message : 'Error desconocido al eliminar el producto');
 		}
 	};
 
@@ -127,7 +127,7 @@ export const FrontPage = () => {
 	return (
 		<div className="flex h-[100svh] min-h-screen w-full">
 			{/* Leftside */}
-			<div className=" relative flex h-full flex-1 items-start justify-center  py-[50px] pb-[105px]">
+			<div className=" relative flex h-full min-w-[300px] flex-1 items-center justify-center py-[50px] pb-[105px]">
 				<Navbar
 					openOrderModal={() => setOrderModalVisible(true)}
 					refetchProducts={fetchProducts}

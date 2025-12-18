@@ -18,9 +18,9 @@ export const ProductList = ({
 }: Props) => {
 
 	return (
-		<div className="styledScroll h-full flex items-center justify-center  overflow-auto">
+		<div className="styledScroll  w-full h-full flex items-center justify-center overflow-auto">
 			{products?.length === 0 && (
-				<div>
+				<div className="w-full">
 					<p className="text-center text-[20px] sm:text-[30px] pb-[10px] text-[#909090]">
 						No hay productos disponibles
 					</p>
@@ -35,7 +35,7 @@ export const ProductList = ({
 
 
 			{products === "error" && (
-				<div>
+				<div className="w-full ">
 					<p className="text-center text-[20px]  sm:text-[30px] pb-[10px] text-[#909090]">
 						Error al obtener los productos
 					</p>
@@ -45,18 +45,19 @@ export const ProductList = ({
 				</div>
 			)}
 
-			<div className="flex h-fit max-h-[80svh] w-full flex-wrap items-start justify-center pt-[5px] gap-[20px]">
-				{Array.isArray(products) && products?.map((product) => (
-					<ProductCard 
-						key={product.id} 
-						product={product} 
-						addToOrder={addToOrder}
-						isAdded={currentOrder.some(item => item.id === product.id)}
-						deleteProduct={deleteProduct}
-					/>
-				))}
-
-			</div>
+			{Array.isArray(products) && products.length > 0 && (
+				<div className="flex h-fit max-h-[80svh] w-full flex-wrap items-start justify-center pt-[5px] gap-[20px]">
+					{products.map((product) => (
+						<ProductCard
+							key={product.id}
+							product={product}
+							addToOrder={addToOrder}
+							isAdded={currentOrder.some(item => item.id === product.id)}
+							deleteProduct={deleteProduct}
+						/>
+					))}
+				</div>
+			)}
 		</div>
 	);
 };
