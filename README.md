@@ -61,8 +61,8 @@ Antes de comenzar, asegúrate de tener instalado:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/pablofernz/OceansStacks-Tienda
-cd OceansStacks-Tienda
+git clone https://github.com/pablofernz/oceanstacks-react-challenge
+cd oceanstacks-react-challenge
 ```
 
 ### 2. Configurar el Backend
