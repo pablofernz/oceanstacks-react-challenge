@@ -1,5 +1,5 @@
-import { MiniClock } from '../../handlers/clock';
-import type { ILocalOrderProduct } from '../../types/order';
+import { MiniClock } from '../../../handlers/clock';
+import type { ILocalOrderProduct } from '../../../types/order';
 
 interface Props {
 	closeModal: () => void;

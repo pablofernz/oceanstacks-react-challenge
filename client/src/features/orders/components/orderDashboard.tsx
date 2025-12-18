@@ -1,8 +1,8 @@
 import { motion } from 'motion/react';
 import { createPortal } from 'react-dom';
 import { useState } from 'react';
-import type { IOrder } from '../../types/order';
-import { deleteOrder } from '../../api/orders.api';
+import type { IOrder } from '../../../types/order';
+import { deleteOrder } from '../../../api/orders.api';
 import { OrderCard } from './orderCard';
 
 interface Props {

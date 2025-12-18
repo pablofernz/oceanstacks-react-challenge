@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import { CreateProductForm } from './modals/createProductForm';
-import { OrdersDashboard } from './modals/orderDashboard';
+
 import type { IOrder } from '../types/order';
+import { OrdersDashboard } from '../features/orders/components/orderDashboard';
+import { CreateProductForm } from '../features/products/components/createProductForm';
 
 interface Props {
 	openOrderModal: () => void;

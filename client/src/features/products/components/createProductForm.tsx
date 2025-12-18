@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { createProduct } from '../../api/products.api';
-import InfinityLoader from '../loader/loader';
+import { createProduct } from '../../../api/products.api';
+import InfinityLoader from '../../../components/loader/loader';
 
 // Esquema de validación con Zod
 const productSchema = z.object({

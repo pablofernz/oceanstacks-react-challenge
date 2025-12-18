@@ -1,7 +1,7 @@
 import { ProductCard } from "./productCard";
-import type { IProduct } from "../../types/product";
-import type { ILocalOrderProduct } from "../../types/order";
-import InfinityLoader from "../loader/loader";
+import type { IProduct } from "../../../types/product";
+import type { ILocalOrderProduct } from "../../../types/order";
+import InfinityLoader from "../../../components/loader/loader";
 
 interface Props {
 	products: IProduct[] | null | "error";

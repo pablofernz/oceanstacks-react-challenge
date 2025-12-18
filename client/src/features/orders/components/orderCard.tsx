@@ -1,4 +1,6 @@
-import type { IOrder } from "../../types/order";
+import type { IOrder } from "../../../types/order";
+
+import { OrderItem } from "./orderItem";
 
 interface Props {
     order: IOrder;
@@ -48,16 +50,7 @@ export const OrderCard = ({ order, handleDelete, deletingId }: Props) => {
             </div>
             <div className="flex flex-col gap-2">
                 {order.order_items.map((item, index) => (
-                    <div
-                        key={index}
-                        className="flex items-center justify-between text-sm"
-                    >
-                        <span className="text-[#c0c0c0]">
-                            {item.product.name}{' '}
-                            <span className="text-[#606060]">x{item.quantity}</span>
-                        </span>
-                        <span className="text-[#909090]">${item.price}</span>
-                    </div>
+                    <OrderItem key={index} item={item} />
                 ))}
             </div>
         </div>
