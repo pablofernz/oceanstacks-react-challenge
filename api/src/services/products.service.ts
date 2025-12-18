@@ -15,10 +15,6 @@ export const getAllProducts = async (): Promise<Product[]> => {
     throw new HttpError(500, `Error fetching products: ${error.message}`);
   }
 
-  if (data.length === 0) {
-    throw new HttpError(404, "Product fetching failed: No products found");
-  }
-
   return data;
 };
 
