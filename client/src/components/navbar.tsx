@@ -22,8 +22,8 @@ export default function Navbar({ openOrderModal, refetchProducts, orders, refetc
 
 	return (
 		<>
-			<nav className="fixed bottom-0 flex h-[100px] w-full items-center justify-center py-[10px]">
-				{/* <div className="absolute bottom-[100%] z-[1] h-[200px] w-[80%] bg-gradient-to-t from-[#0e0e0e] to-transparent xs:h-[100px]"></div> */}
+			<nav
+				className="fixed bottom-0 z-[2] flex h-[100px] w-full items-center justify-center py-[10px]">
 				<div className="z-10 flex h-[60px]  scale-90 gap-[8px] rounded-[20px] bg-[#2b2b2b] p-[8px] w-fit ">
 					<div className="relative flex items-center justify-center">
 						<button
@@ -107,7 +107,7 @@ export default function Navbar({ openOrderModal, refetchProducts, orders, refetc
 						<button
 							onMouseEnter={() => setButtonHovered('order')}
 							onMouseLeave={() => setButtonHovered(null)}
-							onClick={() => openOrderModal()}
+							onClick={() => { setModalOpen('order'); openOrderModal(); }}
 							className="flex aspect-square h-full items-center justify-center rounded-[12px] bg-[#404040] duration-300 ease-in-out hover:brightness-125"
 						>
 							<svg
@@ -140,7 +140,7 @@ export default function Navbar({ openOrderModal, refetchProducts, orders, refetc
 						</AnimatePresence>
 					</div>
 				</div>
-			</nav>
+			</nav >
 
 			<AnimatePresence>
 				{modalOpen === 'ordersDashboard' && (

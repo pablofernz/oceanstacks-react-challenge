@@ -67,7 +67,7 @@ export const Home = () => {
 							animate={{ x: 0 }}
 							exit={{ x: '100%' }}
 							transition={{ duration: 0.5, ease: 'easeInOut' }}
-							className="absolute right-0 h-full w-full xs:w-[400px] xs:p-[20px]"
+							className="absolute z-[3] right-0 h-full w-full xs:w-[400px] xs:p-[20px]"
 						>
 							<OrderModal
 								closeModal={() => setOrderModalVisible(false)}
