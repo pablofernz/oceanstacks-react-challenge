@@ -3,7 +3,7 @@ import { createOrder } from '../../../api/orders.api';
 import type { ILocalOrderProduct } from '../../../types/order';
 import type { IProduct } from '../../../types/product';
 
-export const useCart = () => {
+export const useOrderDraft = () => {
     const [currentOrder, setCurrentOrder] = useState<ILocalOrderProduct[]>([]);
     const [isCreatingOrder, setIsCreatingOrder] = useState(false);
 

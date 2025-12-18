@@ -6,8 +6,8 @@ import { ProductList } from '../features/products/components/productList';
 
 import { useProducts } from '../features/products/hooks/useProducts';
 import { useOrders } from '../features/orders/hooks/useOrders';
-import { useCart } from '../features/orders/hooks/useCart';
 import Navbar from '../components/navbar';
+import { useOrderDraft } from '../features/orders/hooks/useOrderDraft';
 
 export const Home = () => {
 	const viewportWidth = useViewportWidth();
@@ -24,7 +24,7 @@ export const Home = () => {
 		clearOrder,
 		saveOrder,
 		isCreatingOrder
-	} = useCart();
+	} = useOrderDraft();
 
 	useEffect(() => {
 		fetchProducts();

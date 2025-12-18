@@ -71,7 +71,7 @@ export const OrdersDashboard = ({ closeModal, orders, refetchOrders }: Props) =>
 					<h2 className="text-[16px] sm:text-xl text-[#e0e0e0]">Historial de Órdenes</h2>
 				</header>
 
-				<div className="flex flex-1 flex-col gap-4 overflow-y-auto p-6">
+				<div className="scrollHidden flex flex-1 flex-col  gap-4 overflow-y-auto p-6">
 					{orders === null ? (
 						<p className="text-[#808080]">Cargando...</p>
 					) : orders === 'error' ? (
