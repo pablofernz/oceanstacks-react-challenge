@@ -41,10 +41,12 @@ La aplicación implementa una **API REST** con los siguientes endpoints:
 ### Productos
 - `GET /products` - Obtener lista de productos
 - `POST /products` - Crear nuevo producto
+- `DELETE /products` - Borrar un producto (borrado lógico o soft delete)
 
 ### Órdenes
 - `GET /orders` - Obtener todas las órdenes
 - `POST /orders` - Crear nueva orden
+- `DELETE /orders` - Borrar una orden
 
 ## 📋 Prerrequisitos
 
@@ -59,8 +61,8 @@ Antes de comenzar, asegúrate de tener instalado:
 
 ### 1. Clonar el repositorio
 ```bash
-git clone https://github.com/pablofernz/OceansStacks-Tienda
-cd OceansStacks-Tienda
+git clone https://github.com/pablofernz/oceanstacks-react-challenge
+cd oceanstacks-react-challenge
 ```
 
 ### 2. Configurar el Backend
