@@ -1,0 +1,11 @@
+node_modules
+dist
+build
+.next
+.vscode
+.git
+.gitignore
+package.json
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
