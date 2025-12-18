@@ -1,11 +1,6 @@
 import style from "./loader.module.css";
 
-// interface InfinityLoaderProps {
-//   size: number;
-//   color: string;
-// }
 
-// export default function InfinityLoader({ size, color }: InfinityLoaderProps) {
 export default function InfinityLoader({ scale, color }: { scale: string; color: string }) {
   return (
     <svg

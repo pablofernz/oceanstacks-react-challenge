@@ -22,6 +22,19 @@ export const createProduct = async (productData: CreateProductDTO) => {
 	return response.json();
 };
 
+export const deleteProduct = async (id: string) => {
+	const response = await fetch(`${API_URL}/products/${id}`, {
+		method: 'DELETE',
+	});
+
+	if (!response.ok) {
+		const errorData = await response.json();
+		throw new Error(errorData.message || 'Error al eliminar el producto');
+	}
+
+	return response.json();
+};
+
 export const getAllProducts = async () => {
 	const response = await fetch(`${API_URL}/products`);
 

@@ -1,14 +1,31 @@
 import { MiniClock } from '../../handlers/clock';
+import type { ILocalOrderProduct } from '../../types/order';
 
 interface Props {
 	closeModal: () => void;
+	currentOrder: ILocalOrderProduct[];
+	handleQuantityChange: (id: string, action: 'increment' | 'decrement') => void;
+	handleSaveOrder: () => void;
+	clearOrder: () => void;
+	isCreatingOrder: boolean;
 }
-export const OrderModal = ({ closeModal }: Props) => {
+
+export const OrderModal = ({ closeModal, currentOrder, handleQuantityChange, handleSaveOrder, clearOrder, isCreatingOrder }: Props) => {
+	const total = currentOrder.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+	const handleDelete = () => {
+		if (currentOrder.length > 0) {
+			if (confirm('¿Estás seguro de que deseas vaciar la orden?')) {
+				clearOrder();
+			}
+		}
+	};
+
 	return (
 		<div className="z-10 size-full bg-[#202020] p-[15px] pt-0 shadow-[0_0_50px_rgba(0,0,0,0.5)] xs:rounded-[20px]">
 			<header className="flex h-[10%] w-full items-center justify-between">
 				<div className="flex gap-[15px]">
-					<p className="text-[20px] text-[#a4a4a4] sm:text-[24px]">Órdenes</p>
+					<p className="text-[16px] text-[#a4a4a4] sm:text-[20px]">Orden Actual</p>
 				</div>
 				<p className="hidden text-[16px] font-medium text-[#7a7a7a] md:block">
 					{MiniClock()}
@@ -35,9 +52,36 @@ export const OrderModal = ({ closeModal }: Props) => {
 			</header>
 
 			<main className="scrollHidden flex h-[60%] w-full flex-col gap-[15px] overflow-scroll pb-[40px]">
-				{[1, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3].map(() => (
-					<div className="h-[60px] w-full flex-shrink-0 rounded-[10px] bg-[#353535]"></div>
-				))}
+				{currentOrder.length === 0 ? (
+					<div className="flex h-full w-full flex-col items-center justify-center text-[#505050]">
+						<p>No hay productos</p>
+					</div>
+				) : (
+					currentOrder.map((item) => (
+						<div key={item.id} className="flex h-[60px] w-full flex-shrink-0 items-center justify-between rounded-[10px] bg-[#353535] px-[15px]">
+							<div className="flex flex-col">
+								<p className="text-[#b0b0b0]">{item.name}</p>
+								<p className="text-[12px] text-[#808080]">${item.price}</p>
+							</div>
+							<div className="flex items-center gap-[10px]">
+								<button
+									onClick={() => handleQuantityChange(item.id, 'decrement')}
+									className="flex size-[25px] items-center justify-center rounded-[5px] bg-[#454545] text-[#a0a0a0] hover:brightness-125"
+								>
+									-
+								</button>
+								<p className="w-[20px] text-center text-[#b0b0b0]">{item.quantity}</p>
+								<button
+									onClick={() => handleQuantityChange(item.id, 'increment')}
+									disabled={item.quantity >= 10}
+									className={`flex size-[25px] items-center justify-center rounded-[5px] bg-[#454545] text-[#a0a0a0] hover:brightness-125 ${item.quantity >= 10 ? 'opacity-50 cursor-not-allowed' : ''}`}
+								>
+									+
+								</button>
+							</div>
+						</div>
+					))
+				)}
 			</main>
 
 			<footer className="relative flex h-[30%] w-full flex-col items-end justify-center rounded-[10px]">
@@ -50,12 +94,12 @@ export const OrderModal = ({ closeModal }: Props) => {
 							<p className="text-[14px] text-[#808080]">
 								Cantidad de productos
 							</p>
-							<p className="text-[14px] text-[#808080]">5</p>
+							<p className="text-[14px] text-[#808080]">{currentOrder.reduce((acc, item) => acc + item.quantity, 0)}</p>
 						</div>
 
 						<div className="flex items-center justify-between">
 							<p className="text-[14px] text-[#808080]">Subtotal</p>
-							<p className="text-[14px] text-[#808080]">$40</p>
+							<p className="text-[14px] text-[#808080]">${total.toFixed(2)}</p>
 						</div>
 					</div>
 
@@ -65,12 +109,15 @@ export const OrderModal = ({ closeModal }: Props) => {
 							<div className="absolute left-[98.5%] size-[15px] rounded-full bg-[#202020]"></div>
 						</span>
 						<p>Total</p>
-						<p>$40</p>
+						<p>${total.toFixed(2)}</p>
 					</div>
 				</div>
 
 				<div className="flex w-full gap-[15px]">
-					<button className="flex aspect-square h-full items-center justify-center rounded-[10px] bg-[#353535] text-[#8f8f8f] duration-300 hover:brightness-125">
+					<button
+						onClick={handleDelete}
+						className="flex aspect-square h-full items-center justify-center rounded-[10px] bg-[#353535] text-[#8f8f8f] duration-300 hover:brightness-125"
+					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 24 24"
@@ -85,8 +132,12 @@ export const OrderModal = ({ closeModal }: Props) => {
 						</svg>
 					</button>
 
-					<button className="w-full rounded-[10px] bg-[#353535] py-[10px] text-[14px] text-[#8f8f8f] duration-300 hover:brightness-125">
-						Guardar órden
+					<button
+						onClick={handleSaveOrder}
+						disabled={isCreatingOrder || currentOrder.length === 0}
+						className={`w-full rounded-[10px] bg-[#353535] py-[10px] text-[14px] text-[#8f8f8f] duration-300 hover:brightness-125 ${isCreatingOrder || currentOrder.length === 0 ? 'opacity-50 cursor-not-allowed' : ''}`}
+					>
+						{isCreatingOrder ? 'Guardando...' : 'Guardar órden'}
 					</button>
 				</div>
 			</footer>

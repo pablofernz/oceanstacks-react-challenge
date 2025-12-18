@@ -2,12 +2,15 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
 import { CreateProductForm } from './modals/createProductForm';
 import { OrdersDashboard } from './modals/orderDashboard';
+import type { IOrder } from '../types/order';
 
 interface Props {
 	openOrderModal: () => void;
 	refetchProducts: () => Promise<void>;
+	orders: IOrder[] | null | "error";
+	refetchOrders: () => Promise<void>;
 }
-export default function Navbar({ openOrderModal, refetchProducts }: Props) {
+export default function Navbar({ openOrderModal, refetchProducts, orders, refetchOrders }: Props) {
 	const [buttonHovered, setButtonHovered] = useState<
 		'ordersDashboard' | 'createProduct' | 'order' | null
 	>(null);
@@ -20,7 +23,6 @@ export default function Navbar({ openOrderModal, refetchProducts }: Props) {
 		<>
 			<nav className="fixed bottom-0 flex h-[100px] w-full items-center justify-center py-[10px]">
 				{/* <div className="absolute bottom-[100%] z-[1] h-[200px] w-[80%] bg-gradient-to-t from-[#0e0e0e] to-transparent xs:h-[100px]"></div> */}
-
 				<div className="z-10 flex h-[60px]  scale-90 gap-[8px] rounded-[20px] bg-[#2b2b2b] p-[8px] w-fit ">
 					<div className="relative flex items-center justify-center">
 						<button
@@ -141,7 +143,11 @@ export default function Navbar({ openOrderModal, refetchProducts }: Props) {
 
 			<AnimatePresence>
 				{modalOpen === 'ordersDashboard' && (
-					<OrdersDashboard closeModal={() => setModalOpen(null)} />
+					<OrdersDashboard
+						closeModal={() => setModalOpen(null)}
+						orders={orders}
+						refetchOrders={refetchOrders}
+					/>
 				)}
 			</AnimatePresence>
 

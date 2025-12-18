@@ -1,17 +1,22 @@
 import { ProductCard } from "./productCard";
 import type { IProduct } from "../../types/product";
+import type { ILocalOrderProduct } from "../../types/order";
 import InfinityLoader from "../loader/loader";
 
 interface Props {
 	products: IProduct[] | null | "error";
-
+	addToOrder: (product: IProduct) => void;
+	currentOrder: ILocalOrderProduct[];
+	deleteProduct: (id: string) => void;
 }
 
 export const ProductList = ({
-	products
+	products,
+	addToOrder,
+	currentOrder,
+	deleteProduct
 }: Props) => {
 
-	console.log(products)
 	return (
 		<div className="styledScroll h-full flex items-center justify-center  overflow-auto">
 			{products?.length === 0 && (
@@ -42,7 +47,13 @@ export const ProductList = ({
 
 			<div className="flex h-fit max-h-[80svh] w-full flex-wrap items-start justify-center pt-[5px] gap-[20px]">
 				{Array.isArray(products) && products?.map((product) => (
-					<ProductCard key={product.id} product={product} />
+					<ProductCard 
+						key={product.id} 
+						product={product} 
+						addToOrder={addToOrder}
+						isAdded={currentOrder.some(item => item.id === product.id)}
+						deleteProduct={deleteProduct}
+					/>
 				))}
 
 			</div>

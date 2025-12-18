@@ -47,7 +47,6 @@ export const CreateProductForm = ({ closeModal, refetchProducts }: Props) => {
 			if (newProduct) {
 				alert('Producto creado con éxito');
 			}
-			// Aquí se podría agregar una notificación de éxito o actualizar la lista de productos
 		} catch (error) {
 			setApiError(error instanceof Error ? error.message : 'Error desconocido al crear el producto');
 		} finally {
