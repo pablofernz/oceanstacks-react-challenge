@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   price: number;
   created_at?: string;
@@ -13,7 +13,7 @@ export interface Order {
 
 export interface OrderItem {
   order_id: number;
-  product_id: number;
+  product_id: string;
   quantity: number;
   price: number;
 }
@@ -29,7 +29,7 @@ export interface OrderWithItems extends Order {
 }
 
 export type IncomingOrderProduct = {
-  id: number;
+  id: string;
   price: number;
   quantity: number;
 };

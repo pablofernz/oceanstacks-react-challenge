@@ -32,7 +32,7 @@ export const createOrder = async (
     );
   }
 
-  // Validamos cada producto, id debe ser string y quantity un número positivo (se valida en el front-end pero por las dudas)
+  // Validamos cada producto, id debe ser string (uuid) y quantity un número positivo
   for (const product of products) {
     if (
       typeof product?.id !== "string" ||
@@ -78,8 +78,8 @@ export const createOrder = async (
   }
 
   // Creamos un Map de precios para consultar rápidamente el precio de cada producto (en vez de recorrer el array cada vez)
-  const priceMap = new Map<number, number>();
-  dbProducts.forEach((product) => priceMap.set(product.id, product.price));
+  const priceMap = new Map<string, number>();
+  dbProducts.forEach((product) => priceMap.set(product.id as unknown as string, product.price));
 
   // Calculamos el total de la orden multiplicando la cantidad de cada producto
   // por su precio real en la base de datos. Esto asegura que el front-end no pueda
