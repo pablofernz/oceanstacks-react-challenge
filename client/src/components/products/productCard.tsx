@@ -1,12 +1,9 @@
 'use client';
 import { motion } from 'motion/react';
+import type { IProduct } from '../../types/product';
 
 interface Props {
-	product: {
-		id: number;
-		name: string;
-		price: number;
-	};
+	product: IProduct
 }
 export function ProductCard({ product }: Props) {
 	return (
@@ -22,9 +19,9 @@ export function ProductCard({ product }: Props) {
 				className="h-[100px] w-full rounded-[10px]"
 				style={{ backgroundColor: 'rgb(20, 20, 20)' }}
 			/>
-			<p className="h-[50px] text-base text-[#b3b3b3]">{product.name}</p>
+			<p className="h-[50px] pt-[5px] text-base text-[#b3b3b3]">{product.name}</p>
 
-			<p className="mt-[0px] p-[0px] text-[rgb(138,138,138)]">
+			<p className="mt-[0px]  p-[0px] text-[rgb(138,138,138)]">
 				${product.price.toFixed(2)}
 			</p>
 			<button className="mt-[10px] flex h-[35px] w-full cursor-pointer items-center justify-center rounded-[10px] border-none bg-[#454545] text-[14px] text-[rgb(170,170,170)] transition-all duration-300 ease-in-out hover:brightness-125">

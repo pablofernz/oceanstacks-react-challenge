@@ -1,21 +1,51 @@
 import { AnimatePresence, motion } from 'motion/react';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useViewportWidth from '../handlers/useViewportWidth';
 import { OrderModal } from './orders/orderModal';
 import { ProductList } from './products/productList';
 import Navbar from './navbar';
+import { getAllProducts } from '../api/products.api';
+import type { IProduct } from '../types/product';
 
 export const FrontPage = () => {
 	const viewportWidth = useViewportWidth();
 	const [orderModalVisible, setOrderModalVisible] = useState<boolean>(
 		viewportWidth >= 768,
 	);
+	const [products, setProducts] = useState<IProduct[] | null | "error">(null);
+
+	const fetchProducts = useCallback(async () => {
+		try {
+			const allProducts = await getAllProducts();
+
+			setProducts(allProducts);
+		} catch (error) {
+			setProducts("error");
+			console.log(
+				error instanceof Error
+					? error.message
+					: 'Error desconocido al obtener los productos',
+			);
+
+		}
+	}, []);
+
+
+	useEffect(() => {
+		// Funciona correctamente pero quito el alert de eslint,
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		fetchProducts();
+	}, [fetchProducts]);
+
+
+
+
 	return (
 		<div className="flex h-[100svh] min-h-screen w-full">
 			{/* Leftside */}
-			<div className="scrollHidden relative flex h-full flex-1 items-start justify-center overflow-scroll py-[50px] pb-[105px]">
-				<Navbar openOrderModal={() => setOrderModalVisible(true)} />
-				<ProductList />
+			<div className=" relative flex h-full flex-1 items-start justify-center  py-[50px] pb-[105px]">
+				<Navbar openOrderModal={() => setOrderModalVisible(true)} refetchProducts={fetchProducts} />
+				<ProductList products={products} />
 			</div>
 
 			{/* Rightside */}

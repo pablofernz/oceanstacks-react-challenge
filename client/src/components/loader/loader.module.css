@@ -1,0 +1,36 @@
+:root {
+  --uib-size: 40px;
+  --uib-speed: 1.3s;
+  --uib-bg-opacity: 0.1;
+}
+
+.container {
+  width: var(--uib-size);
+  height: calc(var(--uib-size) * 2.1 / 5);
+  transform-origin: center;
+  overflow: visible;
+}
+
+.car {
+  fill: none;
+  stroke-dasharray: 15 85;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: travel var(--uib-speed) linear infinite;
+  will-change: stroke-dasharray, stroke-dashoffset;
+  transition: stroke 0.5s ease;
+}
+
+.track {
+  opacity: var(--uib-bg-opacity);
+}
+
+@keyframes travel {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 100;
+  }
+}

@@ -5,8 +5,9 @@ import { OrdersDashboard } from './modals/orderDashboard';
 
 interface Props {
 	openOrderModal: () => void;
+	refetchProducts: () => Promise<void>;
 }
-export default function Navbar({ openOrderModal }: Props) {
+export default function Navbar({ openOrderModal, refetchProducts }: Props) {
 	const [buttonHovered, setButtonHovered] = useState<
 		'ordersDashboard' | 'createProduct' | 'order' | null
 	>(null);
@@ -18,9 +19,9 @@ export default function Navbar({ openOrderModal }: Props) {
 	return (
 		<>
 			<nav className="fixed bottom-0 flex h-[100px] w-full items-center justify-center py-[10px]">
-				<div className="fixed bottom-0 z-[1] h-[200px] w-[80%] bg-gradient-to-t from-[#0e0e0e] to-transparent xs:h-[100px]"></div>
+				{/* <div className="absolute bottom-[100%] z-[1] h-[200px] w-[80%] bg-gradient-to-t from-[#0e0e0e] to-transparent xs:h-[100px]"></div> */}
 
-				<div className="z-10 flex h-[60px] w-[100%] scale-90 gap-[8px] rounded-[20px] bg-[#2b2b2b] p-[8px] shadow-[0_0_40px_rgba(0,0,0,0.5)] xs:w-fit xs:scale-100">
+				<div className="z-10 flex h-[60px]  scale-90 gap-[8px] rounded-[20px] bg-[#2b2b2b] p-[8px] w-fit ">
 					<div className="relative flex items-center justify-center">
 						<button
 							onMouseEnter={() => setButtonHovered('ordersDashboard')}
@@ -97,28 +98,7 @@ export default function Navbar({ openOrderModal }: Props) {
 						</AnimatePresence>
 					</div>
 
-					<div className="relative flex min-w-0 flex-1 xs:flex-none">
-						<input
-							className="h-full min-w-0 flex-1 items-center justify-center rounded-[12px] border-none bg-[#404040] pl-[12px] pr-[42px] text-[14px] text-[#a1a1a1] outline-none duration-300 ease-in-out placeholder:text-[#808080] focus:brightness-110 xs:w-[200px] xs:flex-none"
-							placeholder="Search"
-						></input>
-						<div className="absolute right-0 flex aspect-square h-full items-center justify-center rounded-[12px] duration-300 ease-in-out">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								fill="none"
-								viewBox="0 0 24 24"
-								strokeWidth="3"
-								stroke="#808080"
-								className="size-[20px]"
-							>
-								<path
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-								/>
-							</svg>
-						</div>
-					</div>
+
 
 					<div className="relative flex items-center justify-center md:hidden">
 						<button
@@ -167,7 +147,7 @@ export default function Navbar({ openOrderModal }: Props) {
 
 			<AnimatePresence>
 				{modalOpen === 'createProduct' && (
-					<CreateProductForm closeModal={() => setModalOpen(null)} />
+					<CreateProductForm closeModal={() => setModalOpen(null)} refetchProducts={refetchProducts} />
 				)}
 			</AnimatePresence>
 		</>
