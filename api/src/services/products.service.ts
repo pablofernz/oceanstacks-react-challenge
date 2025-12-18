@@ -8,6 +8,7 @@ export const getAllProducts = async (): Promise<Product[]> => {
   const { data, error } = await supabase
     .from("products")
     .select("*")
+    .eq("is_active", true)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -69,7 +70,7 @@ export const createProduct = async (
 
   const { data, error } = await supabase
     .from("products")
-    .insert({ name: name.trim(), price })
+    .insert({ name: name.trim(), price, is_active: true })
     .select()
     .single();
 
@@ -125,7 +126,7 @@ export const deleteProduct = async (
   const supabase = getSupabase();
   const { data, error } = await supabase
     .from("products")
-    .delete()
+    .update({ is_active: false })
     .eq("id", id)
     .select();
 
@@ -138,6 +139,6 @@ export const deleteProduct = async (
   }
 
   return {
-    message: `Success: Product with name: ${data[0].name} has been deleted`,
+    message: `Success: Product with name: ${data[0].name} has been soft deleted`,
   };
 };
